@@ -11,12 +11,11 @@
  */
 package com.hankcs.demo;
 
-import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 
 /**
  * 演示动态设置预置分词器，这里的设置是全局的
- * @author hankcs
+ * @author hankcshttps://github.com/hankcs/HanLP
  */
 public class DemoTokenizerConfig
 {

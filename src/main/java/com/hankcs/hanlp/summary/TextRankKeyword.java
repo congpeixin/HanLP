@@ -3,6 +3,9 @@ package com.hankcs.hanlp.summary;
 
 import com.hankcs.hanlp.algorithm.MaxHeap;
 import com.hankcs.hanlp.seg.common.Term;
+import org.apdplat.word.WordSegmenter;
+import org.apdplat.word.segmentation.SegmentationAlgorithm;
+import org.apdplat.word.tagging.PartOfSpeechTagging;
 
 import java.util.*;
 
@@ -64,7 +67,10 @@ public class TextRankKeyword extends KeywordExtractor
     public Map<String,Float> getTermAndRank(String content)
     {
         assert content != null;
-        List<Term> termList = defaultSegment.seg(content);
+//        List<Term> termList = defaultSegment.seg(content);
+        List<Term> termList = PartOfSpeechTagging.process(WordSegmenter.seg(content, SegmentationAlgorithm.BidirectionalMaximumMatching));
+        //在这里替换分词方法
+        //返回格式：[如果/c, 太忙/nz, 太/d, 累/a, 不/d, 想/v, 烧/vi, 脑/n, 看/v, 电影/n, ，/w, 那/rzv
         return getRank(termList);
     }
 
@@ -174,4 +180,11 @@ public class TextRankKeyword extends KeywordExtractor
 
         return score;
     }
+
+   public static void main(String[] args){
+       String content = "杨尚川是APDPlat应用级产品开发平台的作者";
+       List<Term> termList = defaultSegment.seg(content);
+       System.out.print(termList);
+   }
+
 }
